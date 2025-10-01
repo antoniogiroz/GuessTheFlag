@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+struct TitleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle.bold())
+            .foregroundStyle(.white)
+    }
+}
+
+extension View {
+    func title() -> some View {
+        modifier(TitleModifier())
+    }
+}
+
 struct ContentView: View {
     static let allCountries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"]
     let maxAttempts = 8
@@ -35,10 +49,11 @@ struct ContentView: View {
                 Spacer()
                 
                 Text("Guess the Flag")
-                        .font(.largeTitle.bold())
-                        .foregroundStyle(.white)
+                    .title()
                 
-                VStack(spacing: 15) {
+                Spacer()
+                
+                VStack(spacing: 24) {
                     VStack(spacing: 16) {
                         Text("Tap the flag of")
                             .font(.subheadline.weight(.heavy))
